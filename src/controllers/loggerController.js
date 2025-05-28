@@ -5,13 +5,9 @@ module.exports = {
   postLogger: async (req, res) => {
     try {
       const { user_id, name, data  } = req.body
-     
-      let setData = {
-        user_id,
-        name,
-        data
-      }
-      const result = await Logger.postLogger(setData)
+      const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+      let newData = {user_id,name,data, ip: ip}
+      const result = await Logger.postLogger(newData)
       return helperWrapper.response(res, 201, 'Success save', result)
     } catch (err) {
       return helperWrapper.response(
