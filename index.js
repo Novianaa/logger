@@ -5,7 +5,6 @@ const helmet = require('helmet');
 
 const app = express()
 const PORT = process.env.PORT || 5000
-// const PORT = port
 const router = require('./src/routes/index')
 
 app.use(helmet({
